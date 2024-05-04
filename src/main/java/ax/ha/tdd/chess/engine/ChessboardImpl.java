@@ -55,7 +55,26 @@ public class ChessboardImpl implements Chessboard {
                     addPiece(new Pawn(Color.BLACK, new Square(xCoordinate, yCoordinate)));
                     addPiece(new Pawn(Color.WHITE, new Square(xCoordinate, 7 - yCoordinate)));
                 }
-                //TODO, when you implement a piece, add it as a case in this switch
+                case ROOK -> {
+                    addPiece(new Rook(Color.BLACK, new Square(xCoordinate, yCoordinate)));
+                    addPiece(new Rook(Color.WHITE, new Square(xCoordinate, 7 - yCoordinate)));
+                }
+                case BISHOP -> {
+                    addPiece(new Bishop(Color.BLACK, new Square(xCoordinate, yCoordinate)));
+                    addPiece(new Bishop(Color.WHITE, new Square(xCoordinate, 7 - yCoordinate)));
+                }
+                case KNIGHT -> {
+                    addPiece(new Knight(Color.BLACK, new Square(xCoordinate, yCoordinate)));
+                    addPiece(new Knight(Color.WHITE, new Square(xCoordinate, 7 - yCoordinate)));
+                }
+                case QUEEN -> {
+                    addPiece(new Queen(Color.BLACK, new Square(xCoordinate, yCoordinate)));
+                    addPiece(new Queen(Color.WHITE, new Square(xCoordinate, 7 - yCoordinate)));
+                }
+                case KING -> {
+                    addPiece(new King(Color.BLACK, new Square(xCoordinate, yCoordinate)));
+                    addPiece(new King(Color.WHITE, new Square(xCoordinate, 7 - yCoordinate)));
+                }
                 default -> {
                     addPiece(new ChessPieceStub(pieceType, Color.BLACK, new Square(xCoordinate, yCoordinate)));
                     addPiece(new ChessPieceStub(pieceType, Color.WHITE, new Square(xCoordinate, 7 - yCoordinate)));
@@ -68,5 +87,14 @@ public class ChessboardImpl implements Chessboard {
     @Override
     public Iterator<ChessPiece[]> iterator() {
         return List.of(board).iterator();
+    }
+
+    public void movePiece(Square source, Square target) {
+        ChessPiece piece;
+        piece = board[source.getY()][source.getX()];
+
+        removePieceAt(source);
+        piece.setLocation(target);
+        addPiece(piece);
     }
 }
