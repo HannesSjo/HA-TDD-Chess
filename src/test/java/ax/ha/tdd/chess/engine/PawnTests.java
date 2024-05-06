@@ -63,4 +63,16 @@ public class PawnTests {
         boolean canMove = pawn.canMove(chessboard, new Square("e5"));
         assertFalse(canMove);
     }
+
+    @Test
+    public void testPawnMoveDiagonallyToEmptySquare() {
+        Chessboard chessboard = new ChessboardImpl();
+        Pawn pawn = new Pawn(Color.WHITE, new Square("e2"));
+        chessboard.addPiece(pawn);
+
+        boolean canMove = pawn.canMove(chessboard, new Square("d3"));
+
+        assertFalse(canMove);
+    }
+
 }
